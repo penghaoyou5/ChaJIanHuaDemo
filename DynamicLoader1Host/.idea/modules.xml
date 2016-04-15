@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DynamicLoader1Host.iml" filepath="$PROJECT_DIR$/DynamicLoader1Host.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dynamicloader1client/dynamicloader1client.iml" filepath="$PROJECT_DIR$/dynamicloader1client/dynamicloader1client.iml" />
+    </modules>
+  </component>
+</project>

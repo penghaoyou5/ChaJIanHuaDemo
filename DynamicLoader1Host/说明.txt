@@ -1,0 +1,3 @@
+http://blog.csdn.net/singwhatiwanna/article/details/40283117
+http://blog.csdn.net/singwhatiwanna/article/details/22597587
+ Android apk动态加载机制的研究
