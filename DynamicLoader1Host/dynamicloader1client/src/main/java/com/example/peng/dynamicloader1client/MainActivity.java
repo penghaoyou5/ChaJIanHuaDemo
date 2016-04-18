@@ -31,43 +31,18 @@ public class MainActivity extends BaseActivity {
         linearLayout.setBackgroundColor(Color.parseColor("#00ffff"));
         Button button = new Button(context);
 
-button.setText("代理主页");
+        button.setText("代理主页");
         linearLayout.addView(button, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "you clicked button",
                         Toast.LENGTH_SHORT).show();
-                startActivityByProxy(TestActivity.class.getName());
+//                startActivityByProxy(TestActivity.class.getName());
             }
         });
         return linearLayout;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -36,12 +36,12 @@ public class ProxyActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_proxy);
+//        setContentView(R.layout.activity_proxy);
 
         mDexPath = getIntent().getStringExtra(EXTRA_DEX_PATH);
         mClass = getIntent().getStringExtra(EXTRA_CLASS);
 
-//        lunchTargetActivity();
+        lunchTargetActivity();
     }
 
     /**
@@ -86,7 +86,8 @@ public class ProxyActivity extends ActionBarActivity {
             setProxy.setAccessible(true);
             Object invoke = setProxy.invoke(activity, new Object[]{this});
 
-            Method onCreat = loadClass.getMethod("onCreat", new Class[]{Bundle.class});
+            //这里就少了一个 e  onCreate 写成了 onCreat
+            Method onCreat = loadClass.getMethod("onCreate", new Class[]{Bundle.class});
             onCreat.setAccessible(true);
             Bundle builde  = new Bundle();
             builde.putInt(FROM,FROM_EXTERNAL);

@@ -1,3 +1,7 @@
 http://blog.csdn.net/singwhatiwanna/article/details/40283117
 http://blog.csdn.net/singwhatiwanna/article/details/22597587
  Android apk动态加载机制的研究
+
+
+这次提交能够加载外部activity发现原来的问题是在com.example.peng.dynamicloader1client.BaseActivity.onCreate方法中的 setContentView(initView(mProxyActivity));代码换为 mProxyActivity.setContentView(initView(mProxyActivity));
+但是点击按钮跳转仍有问题
