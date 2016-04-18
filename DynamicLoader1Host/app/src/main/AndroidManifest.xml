@@ -15,7 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProxyActivity"></activity>
+        <activity android:name=".ProxyActivity">
+            <intent-filter >
+                <action android:name="com.example.peng.dynamicloader1host.VIEW"></action>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

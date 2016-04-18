@@ -5,3 +5,34 @@ http://blog.csdn.net/singwhatiwanna/article/details/22597587
 
 这次提交能够加载外部activity发现原来的问题是在com.example.peng.dynamicloader1client.BaseActivity.onCreate方法中的 setContentView(initView(mProxyActivity));代码换为 mProxyActivity.setContentView(initView(mProxyActivity));
 但是点击按钮跳转仍有问题
+
+//==============这次来个思维总结：三天没有解决这个问题
+这是思维的问题，也是心智的问题
+思维上说;思维不够严谨，既然是能够加载，只是页面没有进行显示，那就应该考虑到是view没有加载上也就是setContentView()的问题不应该从头开始一遍一遍的对，只有出问题了再说，就像立强当初说gson不会出问题是bean或者json的问题一样
+
+从心智上说，？？？
+
+所以以后要勤动脑严谨思维。
+//=====================================
+
+终于跳转页面也成功了，虽然没完全按照博客上做   intent action 理解不够透彻
+改动
+1：com.example.peng.dynamicloader1client.BaseActivity.startActivityByProxy中
+ Intent intent = new Intent(PROXY_VIEW_ACTION);
+ intent.putExtra(EXTRA_DEX_PATH, DEX_PATH);
+ intent.putExtra(EXTRA_CLASS, className);
+ mProxyActivity.startActivity(intent);
+ 改为
+   Intent intent2 = new Intent(mProxyActivity,mProxyActivity.getClass());
+ intent2.putExtra(EXTRA_DEX_PATH, DEX_PATH);
+  intent2.putExtra(EXTRA_CLASS, className);
+ mProxyActivity.startActivity(intent2);
+ 2：com.example.peng.dynamicloader1host.ProxyActivity.onCreate中
+  lunchTargetActivity();
+  改为
+    if(TextUtils.isEmpty(mClass)){
+        lunchTargetActivity();
+     }else {
+          lunchTargetActivity(mClass);
+     }
+3.将com.example.peng.dynamicloader1client.BaseActivity.onCreate中的东西改回去也没问题

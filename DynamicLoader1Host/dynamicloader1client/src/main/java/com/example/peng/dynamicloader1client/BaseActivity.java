@@ -34,7 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public static final String EXTRA_DEX_PATH = "extra.dex.path";
     public static final String EXTRA_CLASS = "extra.class";
 
-    public static final String PROXY_VIEW_ACTION = "com.ryg.dynamicloadhost.VIEW";
+    public static final String PROXY_VIEW_ACTION = "com.example.peng.dynamicloader1host.VIEW";
     public static final String DEX_PATH = "/mnt/sdcard/DynamicLoadHost/dynamicloader1client-debug.apk";
 
     protected Activity mProxyActivity;
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void setProxy(Activity activity) {
         mProxyActivity = activity;
-        Toast.makeText(activity,"进入代理类"+this.getClass().getName(),Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -59,12 +59,13 @@ public abstract class BaseActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             mProxyActivity = this;
         }
-//        setContentView(initView(mProxyActivity));
+        Toast.makeText(mProxyActivity,"进入代理类"+mProxyActivity.getClass().getName(),Toast.LENGTH_LONG).show();
+        setContentView(initView(mProxyActivity));
         //终于看出了是这里的问题：：：：：   就是这里的没有设置好。。。
-        mProxyActivity.setContentView(initView(mProxyActivity));
+//        mProxyActivity.setContentView(initView(mProxyActivity));
     }
 
-    public abstract View initView(Context mProxyActivity);
+    public abstract View initView(Context context);
 
     protected void startActivityByProxy(String className) {
         //这是从本地进
@@ -73,19 +74,26 @@ public abstract class BaseActivity extends AppCompatActivity {
             intent.setClassName(this, className);
             this.startActivity(intent);
         } else {
-            //这是从代理类进入  ?
-            Intent intent = new Intent(PROXY_VIEW_ACTION);
-//            intent.setClassName(mProxyActivity,className);
-//            intent.putExtra(FROM,FROM_EXTERNAL);
-            intent.putExtra(EXTRA_DEX_PATH, DEX_PATH);
-            intent.putExtra(EXTRA_CLASS, className);
-            mProxyActivity.startActivity(intent);
+
+//            //这是从代理类进入  ?
+//            Intent intent = new Intent(PROXY_VIEW_ACTION);
+////            intent.setClassName(mProxyActivity,className);
+////            intent.putExtra(FROM,FROM_EXTERNAL);
+//            intent.putExtra(EXTRA_DEX_PATH, DEX_PATH);
+//            intent.putExtra(EXTRA_CLASS, className);
+//            mProxyActivity.startActivity(intent);
+
+            Intent intent2 = new Intent(mProxyActivity,mProxyActivity.getClass());
+            intent2.putExtra(EXTRA_DEX_PATH, DEX_PATH);
+            intent2.putExtra(EXTRA_CLASS, className);
+            mProxyActivity.startActivity(intent2);
         }
     }
 
 
     @Override
     public void setContentView(View view) {
+
         if (mProxyActivity == this) {
             super.setContentView(view);
         } else {

@@ -14,17 +14,11 @@ import android.widget.Toast;
 
 public class MainActivity extends BaseActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-
-    }
 
     //这里是重写抽象方法，让父类控制加载view  好好理解控制反转
     @Override
     public View initView(final Context context) {
-        LinearLayout linearLayout = new LinearLayout(mProxyActivity);
+        LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT));
 
@@ -38,7 +32,7 @@ public class MainActivity extends BaseActivity {
             public void onClick(View view) {
                 Toast.makeText(context, "you clicked button",
                         Toast.LENGTH_SHORT).show();
-//                startActivityByProxy(TestActivity.class.getName());
+                startActivityByProxy(TestActivity.class.getName());
             }
         });
         return linearLayout;

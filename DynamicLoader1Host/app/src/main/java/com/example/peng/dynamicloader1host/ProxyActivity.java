@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -41,7 +42,11 @@ public class ProxyActivity extends ActionBarActivity {
         mDexPath = getIntent().getStringExtra(EXTRA_DEX_PATH);
         mClass = getIntent().getStringExtra(EXTRA_CLASS);
 
-        lunchTargetActivity();
+        if(TextUtils.isEmpty(mClass)){
+            lunchTargetActivity();
+        }else {
+            lunchTargetActivity(mClass);
+        }
     }
 
     /**
