@@ -36,3 +36,9 @@ http://blog.csdn.net/singwhatiwanna/article/details/22597587
           lunchTargetActivity(mClass);
      }
 3.将com.example.peng.dynamicloader1client.BaseActivity.onCreate中的东西改回去也没问题
+
+//================================
+这才发现博客本身就有代码下载https://github.com/singwhatiwanna/dynamic-load-apk 不过它是总的
+//=================================
+核心思想是
+类加载器加载类，每次启动的都是代理activity，只不过是将外部apk的activity中的方法实际上运行在代理activity中
