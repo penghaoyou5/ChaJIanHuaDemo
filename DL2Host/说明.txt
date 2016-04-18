@@ -1,0 +1,21 @@
+host 为MainActivity 主页
+Proxy代理
+
+client为MainActivity与 secondActivity
+//虽然可以用接口解决问题 但是为了练习还是用反射
+
+现在有些理解问什么host是外壳  ，client是内容了。
+照我说，就是 控制反转的最好思想实用的地方
+//===============================================
+就是上层控制调用下层的方法而已
+
+接口控制，逻辑推理进行决定
+
+只是让系统掉咱们activity的，咱们在进行顺延而已
+
+//===================================================
+1.把host中proxyActivity对象传到BaseActivity
+2.把BaseActivity中的对象传到proxyActivity中
+2.对于生命周期之类的方法，也就是系统控制Activity走的方法，就在proxy中把baseActivity转型为接口或者Activity然后proxyActivity的相应生命周期中调用baseActivity的相应生命周期
+4.对于自己手动掉activity的方法来说就是要，在baseactivity中重写此方法，让它实际调用proxyActivity的生命周期的方法(但是也要提供相应对象)
+
