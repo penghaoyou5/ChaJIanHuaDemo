@@ -78,9 +78,15 @@ public class ProxyActivity extends AppCompatActivity {
     /**
      * 进行资源类AssetManager的初始化
      * 为什么这个方法写在里不在 client中             ====终于明白了如果是代理类的话最终调用的是这个activity的方法
-     */
+
+    */
     protected void loadResources(){
         try {
+            /**
+             * AssetManager详解
+             * http://blog.csdn.net/luoshengyang/article/details/8738877 Android资源管理框架（Asset Manager）简要介绍和学习计划
+             * http://blog.csdn.net/luoshengyang/article/details/8791064
+             */
             Class<AssetManager> assetManagerClass = AssetManager.class;
             AssetManager assetManager = assetManagerClass.newInstance();
             Method addAssetPath = assetManagerClass.getMethod("addAssetPath", String.class);
@@ -93,11 +99,12 @@ public class ProxyActivity extends AppCompatActivity {
         Resources resources = super.getResources();
         //??后面这两个参数是什么意思？？
 //        mResources = new Resources(mAssetManager,resources.getDisplayMetrics(),resources.getConfiguration());
+        //，第一个是AssetManager，后面两个是和设备相关的配置参数，我们可以直接用当前应用的配置就好
+        //http://blog.csdn.net/liang5630/article/details/46509883
         mResources = new Resources(mAssetManager,resources.getDisplayMetrics(),resources.getConfiguration());
         mTheme = mResources.newTheme();
         mTheme.setTo(getTheme());
     }
-
     @Override
     public AssetManager getAssets() {
         //这里之所以用super是因为已经重写了它的方法

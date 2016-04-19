@@ -19,3 +19,30 @@ client为MainActivity与 secondActivity
 2.对于生命周期之类的方法，也就是系统控制Activity走的方法，就在proxy中把baseActivity转型为接口或者Activity然后proxyActivity的相应生命周期中调用baseActivity的相应生命周期
 4.对于自己手动掉activity的方法来说就是要，在baseactivity中重写此方法，让它实际调用proxyActivity的生命周期的方法(但是也要提供相应对象)
 
+//主要是资源加载的方法
+
+dl2host.dl2host.ProxyActivity#loadResources
+
+  */
+    protected void loadResources(){
+        try {
+            Class<AssetManager> assetManagerClass = AssetManager.class;
+            AssetManager assetManager = assetManagerClass.newInstance();
+            Method addAssetPath = assetManagerClass.getMethod("addAssetPath", String.class);
+            addAssetPath.invoke(assetManager,mDexPath);
+            mAssetManager = assetManager;
+        }catch (Exception e){
+
+        }
+        //这里之所以用super是因为重写了
+        Resources resources = super.getResources();
+        //??后面这两个参数是什么意思？？
+//        mResources = new Resources(mAssetManager,resources.getDisplayMetrics(),resources.getConfiguration());
+        mResources = new Resources(mAssetManager,resources.getDisplayMetrics(),resources.getConfiguration());
+        mTheme = mResources.newTheme();
+        mTheme.setTo(getTheme());
+    }
+	
+	
+//================================中间bug
+感觉就是头脑不清醒没有考虑到犯的错误
