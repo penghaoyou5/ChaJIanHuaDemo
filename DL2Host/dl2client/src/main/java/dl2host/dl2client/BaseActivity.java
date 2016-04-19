@@ -15,9 +15,9 @@ import java.lang.reflect.Method;
 public class BaseActivity extends AppCompatActivity {
 
 
-    public static final String FROM = "from_activity";
+    public static final String FROM = "extra.from";
     //external 外部
-    public static final int  FROM_EXTRA = 1;
+    public static final int  FROM_EXTRA = 0;
 
     public static boolean formWai = false;
 
@@ -38,7 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     //这是跟外边配合 方便传入对象进行调用
-    public void setProxyActivity(Activity activity){
+    public void setProxy(Activity activity){
         context = activity;
         that =mActivity= activity;
         formWai = true;

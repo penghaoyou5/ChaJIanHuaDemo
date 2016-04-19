@@ -64,7 +64,7 @@ public class ProxyActivity extends AppCompatActivity {
 
         //进行方法的调用
         try{
-            methodMap.get("setProxyActivity").invoke(mRemoteActivity,this);
+            methodMap.get("setProxy").invoke(mRemoteActivity,this);
             if(savedInstanceState==null){
                 savedInstanceState = new Bundle();
             }
@@ -171,9 +171,9 @@ public class ProxyActivity extends AppCompatActivity {
         //有参数onCreate
         try {
 
-            Method setProxyActivity = localClass.getMethod("setProxyActivity", Activity.class);
+            Method setProxyActivity = localClass.getMethod("setProxy", Activity.class);
             setProxyActivity.setAccessible(true);
-            methodMap.put("setProxyActivity",setProxyActivity);
+            methodMap.put("setProxy",setProxyActivity);
         }catch (Exception e){
 
         }
