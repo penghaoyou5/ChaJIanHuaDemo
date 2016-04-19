@@ -20,15 +20,15 @@ import dalvik.system.DexClassLoader;
 public class ProxyActivity extends AppCompatActivity {
 
     //差点忘了这个东西  标记activity是从哪里进的方便同时能够进行单独运行与代理运行
-    public static final String FROM = "from_activity";
+    public static final String FROM = "extra.from";
     //external 外部
-    public static final int  FROM_EXTRA = 1;
+    public static final int  FROM_EXTRA = 0;
 
 
 
     //这里定义常量为了通用的加载外部资源  决定一个类  通过包的路径跟类名  这里主要是Activity
-    public static final String  EXTRA_DEX_PATH = "dl2host_dex_path";
-    public static final String  EXTRA_DEX_CLASS = "dl2host_dex_class";
+    public static final String  EXTRA_DEX_PATH = "extra.dex.path";
+    public static final String  EXTRA_DEX_CLASS = "extra.class";
 
     //这是包的路径
     public String mDexPath = "";
@@ -114,9 +114,9 @@ public class ProxyActivity extends AppCompatActivity {
      * 如果没有className就找到默认的
      */
     protected void launchTargetActivity(){
-        File file = new File(mDexPath);
-        boolean exit = file.exists();
-        System.out.print(exit);
+//        File file = new File(mDexPath);
+//        boolean exit = file.exists();
+//        System.out.print(exit);
         PackageInfo packageArchiveInfo = getPackageManager().getPackageArchiveInfo(mDexPath, PackageManager.GET_ACTIVITIES);
         if(packageArchiveInfo.activities!=null&&packageArchiveInfo.activities.length>0){
 //            mDexClass = packageArchiveInfo.activities[0].getClass().getName();  这里犯了一个错误
@@ -132,7 +132,8 @@ public class ProxyActivity extends AppCompatActivity {
         //解压目录  必须为程序私有目录
         File dex = getDir("dex", MODE_PRIVATE);
         //http://blog.csdn.net/com360/article/details/14125683 这是注释文档
-        DexClassLoader dexClassLoader = new DexClassLoader(mDexPath, dex.getAbsolutePath(), null, this.getClass().getClassLoader());
+//        DexClassLoader dexClassLoader = new DexClassLoader(mDexPath, dex.getAbsolutePath(), null, this.getClass().getClassLoader());
+        DexClassLoader dexClassLoader = new DexClassLoader(mDexPath, dex.getAbsolutePath(), null, ClassLoader.getSystemClassLoader());
         try {
             mRemoteClass = dexClassLoader.loadClass(className);
             mRemoteActivity = (Activity) mRemoteClass.newInstance();

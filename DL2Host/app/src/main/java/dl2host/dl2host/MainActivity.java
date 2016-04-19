@@ -24,7 +24,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.btn_proxy_load:
                 Intent intent  = new Intent(this,ProxyActivity.class);
                 //我放到了本地sd卡中
-                intent.putExtra(ProxyActivity.EXTRA_DEX_PATH,"/mnt/sdcard/dl2host/dl2client-debug.apk");
+                intent.putExtra(ProxyActivity.EXTRA_DEX_PATH,"/mnt/sdcard/dl2host/dynamicloader1client-debug.apk");
                 startActivity(intent);
                 break;
         }
